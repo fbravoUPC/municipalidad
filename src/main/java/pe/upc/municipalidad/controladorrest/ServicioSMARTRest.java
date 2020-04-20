@@ -31,6 +31,6 @@ public class ServicioSMARTRest {
             return serviciosSmartQueja.obtenerQueja(dni);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe producto", e);
-        } 
+        }   
     }
 }
