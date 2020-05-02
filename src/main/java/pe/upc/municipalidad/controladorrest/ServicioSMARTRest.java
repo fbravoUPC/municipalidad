@@ -9,6 +9,7 @@ import pe.upc.municipalidad.entidades.EstadoQueja;
 import pe.upc.municipalidad.entidades.Queja;
 import pe.upc.municipalidad.entidades.TipoQueja;
 import pe.upc.municipalidad.entidades.Vecino;
+import pe.upc.municipalidad.jms.JmsProducerConsumer;
 import pe.upc.municipalidad.servicios.ServiciosSmartQueja;
 
 import javax.validation.Valid;
@@ -19,7 +20,8 @@ import java.util.List;
 public class ServicioSMARTRest {
     @Autowired
     private ServiciosSmartQueja serviciosSmartQueja;
-
+    @Autowired
+    private JmsProducerConsumer jmsProducer;
     //-------------------------------------------------------------------------------
     //Vecino
     @PostMapping("registrar/vecino")
@@ -88,4 +90,11 @@ public class ServicioSMARTRest {
     public List<Queja> getAllUsers() {
         return serviciosSmartQueja.obtenerQuejas();
     }
+
+    @GetMapping("/quejas/{dni}")
+    public String enviar(@PathVariable(value = "dni") String dni) {
+        jmsProducer.enviarRecibir(dni);
+        return "OK!";
+    }
+
 }
