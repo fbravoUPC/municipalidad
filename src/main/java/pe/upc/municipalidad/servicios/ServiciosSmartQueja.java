@@ -69,9 +69,15 @@ public class ServiciosSmartQueja {
 
     }
 
-    public Queja registrarQueja(String dni,Queja queja){
+    public Queja registrarQueja(Long estadoid,Long tipoid,String dni,Queja queja){
+
+        EstadoQueja estadoQueja=repositorioEstadoQueja.findById(estadoid).get();
+        TipoQueja tipoQueja=repositorioTipoQueja.findById(tipoid).get();
         Vecino vecino=repositorioVecino.buscarVecino(dni);
         if (queja != null) {
+
+            queja.setEstadoQueja(estadoQueja);
+            queja.setTipoQueja(tipoQueja);
             queja.setVecino(vecino);
             return repositorioQueja.save(queja);
         } else {
@@ -89,10 +95,5 @@ public class ServiciosSmartQueja {
         return repositorioQueja.findAll();
     }
 
-/*
-    public List<Queja> obtenerQueja(String dni) {
-        return repositorioQueja.obtenerQueja(dni);
-    }
 
- */
 }
