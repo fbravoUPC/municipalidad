@@ -84,6 +84,10 @@ public class ServiciosSmartQueja {
         Vecino vecino  = repositorioVecino.buscarVecino(dni);
         return vecino.getQuejas();
     }
+    public List<Queja> obtenerQuejas() {
+
+        return repositorioQueja.findAll();
+    }
 
 /*
     public List<Queja> obtenerQueja(String dni) {
