@@ -1,5 +1,7 @@
 package pe.upc.municipalidad.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,16 +11,23 @@ public class Queja implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int dni ;
-    private String nombres;
-    private String apellidos;
-    private int celular;
-    private  String correo;
-    private String direccion;
-    private String tipoQueja;
-    private String genero;
-    private  String descripcion;
-    private String estado;
+
+    private String sustento;
+
+    @ManyToOne
+    @JoinColumn(name = "vecino_id")
+    @JsonIgnore
+    private Vecino vecino  ;
+
+    @ManyToOne
+    @JoinColumn(name = "estadoqueja_id")
+    @JsonIgnore
+    private EstadoQueja estadoQueja  ;
+
+    @ManyToOne
+    @JoinColumn(name = "tipoqueja_id")
+    @JsonIgnore
+    private TipoQueja tipoQueja  ;
 
     public Long getId() {
         return id;
@@ -28,83 +37,35 @@ public class Queja implements Serializable {
         this.id = id;
     }
 
-    public int getDni() {
-        return dni;
+    public String getSustento() {
+        return sustento;
     }
 
-    public void setDni(int dni) {
-        this.dni = dni;
+    public void setSustento(String sustento) {
+        this.sustento = sustento;
     }
 
-    public String getNombres() {
-        return nombres;
+    public Vecino getVecino() {
+        return vecino;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setVecino(Vecino vecino) {
+        this.vecino = vecino;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public EstadoQueja getEstadoQueja() {
+        return estadoQueja;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setEstadoQueja(EstadoQueja estadoQueja) {
+        this.estadoQueja = estadoQueja;
     }
 
-    public int getCelular() {
-        return celular;
-    }
-
-    public void setCelular(int celular) {
-        this.celular = celular;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTipoQueja() {
+    public TipoQueja getTipoQueja() {
         return tipoQueja;
     }
 
-    public void setTipoQueja(String tipoQueja) {
+    public void setTipoQueja(TipoQueja tipoQueja) {
         this.tipoQueja = tipoQueja;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 }
