@@ -7,5 +7,5 @@ import pe.upc.municipalidad.entidades.Queja;
 
 
 public interface RepositorioQueja extends JpaRepository<Queja,Long> {
- 
+
 }
